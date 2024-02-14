@@ -14,7 +14,7 @@
 entry = input("Digite: 'E' para entrar | 'S' para sair ")
 confirm_password = "12345"
 
-if entry == 'E' or entry =='e': 
+if entry == 'E': 
     password = input("Senha: ")
     if password == confirm_password:
         print("Entrou")
