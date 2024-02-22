@@ -7,11 +7,14 @@ menos escreva "Seu nome é curto"; se tiver entre 5 e 6 letras, escreva
 user_firstname_input = input("Enter your first name: ")
 length_name_input = len(user_firstname_input)
 
-if length_name_input <= 4:
-    print("Your name is short!")
+if length_name_input > 2:
+    if length_name_input <= 4:
+        print("Your name is short!")
 
-elif length_name_input >= 5 and length_name_input <= 6:
-    print("Your first name is normal!")
+    elif length_name_input >= 5 and length_name_input <= 6:
+        print("Your first name is normal!")
 
-else:
-    print("Your first name is big!")
+    else:
+        print("Your first name is big!")
+else: 
+    print("Enter at least more of two letters!")
