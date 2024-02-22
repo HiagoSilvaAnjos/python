@@ -22,8 +22,9 @@ if value_hour_str.isdigit():
         print(f"Good morning! {name}")
     elif value_hour_int >= 12 and value_hour_int <= 17:
         print(f"Good afternoon! {name}")
-    else:
+    elif value_hour_int >= 18 and value_hour_int <= 23:
         print(f"Good night! {name}")
-
+    else:
+        print("I don't know this time")
 else:   
     print("Value hour is invalid (hour entry 0 - 23).")
