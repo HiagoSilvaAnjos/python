@@ -19,6 +19,6 @@ print(0.0) # float
 
 # A função type mostra o tipo que o python
 # inferiu ao valor
-print(type(1))
-print(type("Hello, world!"))
-print(type(0.0))
+print(type(1)) # int
+print(type("Hello, world!")) # str
+print(type(0.0)) # float
