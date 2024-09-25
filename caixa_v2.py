@@ -2,6 +2,12 @@
 saldo = 1000.0  
 extrato = "" 
 
+
+
+
+test = ""
+
+
 print("Bem-vindo ao Caixa Eletrônico v2.0")
 
 while True:
