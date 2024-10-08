@@ -52,6 +52,24 @@ while not kill_programing:
             print(f"Preço: {get_game['price']}\n")
             print()
 
+    if option == "4":
+        os.system("clear")
+        start_index = int(input("Índice inicial: "))
+        end_index = int(input("Índice final: "))
+        len_list = len(games)
+
+        if start_index >= 0 and end_index < len_list and start_index <= end_index:
+            print("Trecho da lista:")
+            for game_index in range(start_index, end_index + 1):
+                get_game = games[game_index]
+                print(f"Nome: {get_game['name']}")
+                print(f"Ano de lançamento: {get_game['year']}")
+                print(f"Preço: {get_game['price']}\n")
+                print()
+        else:
+            print("Intervalo inválido.")
+
+
     if option == "5":
         os.system("clear")
         kill_programing = True
