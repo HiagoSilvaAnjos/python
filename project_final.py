@@ -17,6 +17,11 @@ while not kill_programing:
     option = input("Escolha uma opção: ")
 
     if option == "1":
+
+        if len(games) >= 50:
+            print("Limite de jogos atingido! Não é possível cadastrar mais.")
+            continue
+
         os.system("clear")
         name = input("Nome do game: ")
         year = int(input("Ano de lançamento: "))
