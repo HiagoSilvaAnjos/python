@@ -1,61 +1,74 @@
-# Sistema de Cadastro de Games - Algoritmo Explicado em Comentários
+# Fluxo do Programa de Gerenciamento de Jogos
 
-# Lista para armazenar os dados
-# Inicialmente, teremos uma lista vazia chamada "games" onde os dados dos jogos serão armazenados.
-# A lista terá um limite de 50 registros.
-games = []
+# Este documento descreve o fluxo e a funcionalidade do programa em Python que gerencia uma lista de jogos, permitindo a inserção, busca, visualização, remoção e exibição de um intervalo específico de games. A seguir, será detalhado o que cada parte do código faz, facilitando a compreensão do seu funcionamento.
 
-# Função para inserir um novo game:
-# 1. Verifique se a lista já tem 50 elementos (para evitar que a lista ultrapasse o limite).
-# 2. Se a lista estiver cheia, exiba uma mensagem avisando que não é possível adicionar mais jogos.
-# 3. Caso haja espaço, solicite ao usuário:
-#    - O nome do game (string)
-#    - O ano de lançamento (inteiro)
-#    - O preço do game (float)
-# 4. Crie um dicionário com essas informações e adicione-o ao final da lista "games".
-# 5. Exiba uma mensagem confirmando que o game foi cadastrado com sucesso.
+# 1. Estrutura Principal do Programa
 
-# Função para buscar um game pelo nome:
-# 1. Solicite ao usuário o nome do game que deseja buscar.
-# 2. Percorra a lista "games" utilizando um laço de repetição.
-# 3. Para cada game, compare o nome (transformado para minúsculas) com o nome fornecido pelo usuário.
-# 4. Se o nome for encontrado:
-#    - Exiba as informações do game e a posição onde ele foi encontrado na lista.
-#    - Finalize o laço sem usar "break", apenas ajustando o índice para sair.
-# 5. Se o game não for encontrado, exiba a mensagem "Game não encontrado."
+# O programa é um sistema interativo com um menu principal que permite ao usuário escolher entre várias operações relacionadas a games. Ele segue um fluxo de repetição até que o usuário opte por sair.
 
-# Função para imprimir todos os games:
-# 1. Verifique se a lista está vazia.
-# 2. Se a lista estiver vazia, exiba uma mensagem avisando que não há games cadastrados.
-# 3. Caso contrário, percorra a lista "games" e, para cada elemento:
-#    - Exiba o índice do game na lista.
-#    - Exiba o nome, o ano de lançamento e o preço do game.
+# 2. Variáveis Globais
 
-# Função para imprimir um trecho da lista:
-# 1. Solicite ao usuário dois índices: o índice inicial e o índice final.
-# 2. Verifique se os índices fornecidos são válidos:
-#    - O índice inicial deve ser maior ou igual a 0.
-#    - O índice final deve ser menor que o tamanho da lista.
-#    - O índice inicial deve ser menor ou igual ao índice final.
-# 3. Se os índices forem válidos:
-#    - Percorra a lista do índice inicial até o índice final e exiba as informações dos games.
-# 4. Se os índices forem inválidos, exiba a mensagem "Intervalo inválido."
+# - `games = []`: Uma lista vazia onde os jogos serão armazenados. Cada jogo será um dicionário contendo três atributos: nome, ano de lançamento e preço.
+  
+# - `kill_programing = False`: Um flag booleano usado para controlar o ciclo do programa. Quando definido como `True`, o programa para de rodar.
 
-# Função para mostrar o menu e processar as opções:
-# 1. Exiba um menu com as opções:
-#    - Inserir um novo game.
-#    - Buscar um game pelo nome.
-#    - Imprimir todos os games cadastrados.
-#    - Imprimir um trecho específico da lista de games.
-#    - Sair do sistema.
-# 2. Solicite ao usuário que escolha uma opção.
-# 3. Dependendo da escolha:
-#    - Chame a função correspondente (inserir, buscar, imprimir todos, imprimir trecho).
-# 4. Caso o usuário escolha uma opção inválida, exiba uma mensagem de erro e peça para ele escolher novamente.
-# 5. Continue exibindo o menu até que o usuário escolha a opção "Sair".
-# 6. Ao escolher a opção "Sair", o sistema deve finalizar.
+# - `menu_list`: Uma string que contém o menu de opções que será exibido ao usuário.
 
-# Execução do sistema:
-# 1. Quando o programa é iniciado, chame a função "menu".
-# 2. O sistema continuará em loop, exibindo o menu e aguardando as interações do usuário.
-# 3. O sistema só terminará quando o usuário escolher explicitamente a opção de saída.
+# 3. Funções Implementadas
+
+# a) Função `handle_add_game()`
+#    - Objetivo: Permite ao usuário inserir um novo jogo, capturando o nome, o ano de lançamento e o preço.
+#    - Passos:
+#      1. Limpa o terminal.
+#      2. Solicita ao usuário os dados do jogo.
+#      3. Armazena os dados como um dicionário na lista `games`.
+#      4. Exibe uma mensagem de sucesso.
+     
+# b) Função `search_games()`
+#    - Objetivo: Busca por um jogo específico pelo nome.
+#    - Passos:
+#      1. Limpa o terminal.
+#      2. Verifica se a lista `games` está vazia.
+#      3. Solicita o nome do jogo que o usuário deseja buscar.
+#      4. Percorre a lista de jogos, comparando o nome do jogo buscado com os nomes na lista.
+#      5. Exibe os detalhes do jogo se encontrado, ou uma mensagem de erro se o jogo não estiver cadastrado.
+     
+# c) Função `games_list()`
+#    - Objetivo: Exibe todos os jogos cadastrados.
+#    - Passos:
+#      1. Limpa o terminal.
+#      2. Verifica se a lista `games` está vazia.
+#      3. Percorre a lista de jogos e exibe os detalhes de cada jogo.
+
+# d) Função `find_interval_games()`
+#    - Objetivo: Exibe uma fatia (intervalo) da lista de jogos, com base em índices fornecidos pelo usuário.
+#    - Passos:
+#      1. Limpa o terminal.
+#      2. Verifica se a lista `games` está vazia.
+#      3. Solicita ao usuário o índice inicial e o índice final do intervalo desejado.
+#      4. Verifica a validade do intervalo (os índices devem estar dentro dos limites da lista).
+#      5. Exibe os jogos no intervalo especificado.
+
+# e) Função `remove_game_to_list()`
+#    - Objetivo: Remove um jogo específico da lista de jogos.
+#    - Passos:
+#      1. Limpa o terminal.
+#      2. Verifica se a lista `games` está vazia.
+#      3. Solicita o nome do jogo a ser removido.
+#      4. Percorre a lista e, se o jogo for encontrado, ele é removido da lista.
+#      5. Exibe uma mensagem de sucesso ou erro, dependendo do resultado.
+
+# 4. Fluxo Principal do Programa
+
+# O fluxo principal do programa é controlado por um loop `while`, que continua executando até que o usuário escolha a opção de sair (opção 6). A cada iteração, o menu de opções é exibido, e o usuário pode escolher qual função deseja executar.
+
+# a) Opções do Menu:
+#    1. Inserir um novo game: Chama a função `handle_add_game()`.
+#    2. Buscar um game pelo nome: Chama a função `search_games()`.
+#    3. Imprimir todos os games cadastrados: Chama a função `games_list()`.
+#    4. Imprimir um trecho específico da lista de games: Chama a função `find_interval_games()`.
+#    5. Remover um game da lista: Chama a função `remove_game_to_list()`.
+#    6. Sair do sistema: Define a variável `kill_programing` como `True`, encerrando o loop e o programa.
+
+# b) Fluxo de Tratamento de Erros:
+#    - Sempre que o usuário interage com o programa, pode haver entradas inválidas (por exemplo, digitar algo que não seja um número ao se pedir um preço). Nestes casos, exceções são capturadas e uma mensagem de erro amigável é exibida, permitindo que o usuário tente novamente sem quebrar o programa.
