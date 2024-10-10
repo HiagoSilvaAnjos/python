@@ -70,12 +70,15 @@ def find_interval_games():
     if not games:
         return print("Lista de games vazia...")
     
+    len_list = len(games)
+    print(f"Tamanho da sua lista de games: {len_list}")
     start_index = int(input("Índice inicial: "))
     end_index = int(input("Índice final: "))
-    len_list = len(games)
+    print()
 
     if start_index >= 0 and end_index < len_list and start_index <= end_index:
         print("Trecho da lista: ")
+        print()
         for game_index in range(start_index, end_index + 1):
             get_game = games[game_index]
             print(f"Nome: {get_game['name']}")
