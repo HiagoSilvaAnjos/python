@@ -1,6 +1,47 @@
 import os
 
-games = []
+games = [
+    {"name": "The Witcher 3: Wild Hunt", "year": 2015, "price": 29.99},
+    {"name": "Red Dead Redemption 2", "year": 2018, "price": 39.99},
+    {"name": "Cyberpunk 2077", "year": 2020, "price": 59.99},
+    {"name": "Hades", "year": 2020, "price": 24.99},
+    {"name": "God of War", "year": 2018, "price": 19.99},
+    {"name": "Hollow Knight", "year": 2017, "price": 14.99},
+    {"name": "Celeste", "year": 2018, "price": 19.99},
+    {"name": "Elden Ring", "year": 2022, "price": 59.99},
+    {"name": "Dark Souls III", "year": 2016, "price": 39.99},
+    {"name": "Sekiro: Shadows Die Twice", "year": 2019, "price": 49.99},
+    {"name": "Spider-Man: Miles Morales", "year": 2020, "price": 49.99},
+    {"name": "Fortnite", "year": 2017, "price": 0.00},
+    {"name": "Apex Legends", "year": 2019, "price": 0.00},
+    {"name": "Overwatch", "year": 2016, "price": 39.99},
+    {"name": "League of Legends", "year": 2009, "price": 0.00},
+    {"name": "Valorant", "year": 2020, "price": 0.00},
+    {"name": "Among Us", "year": 2018, "price": 4.99},
+    {"name": "Minecraft", "year": 2011, "price": 26.95},
+    {"name": "Stardew Valley", "year": 2016, "price": 14.99},
+    {"name": "Terraria", "year": 2011, "price": 9.99},
+    {"name": "DOOM Eternal", "year": 2020, "price": 39.99},
+    {"name": "Animal Crossing: New Horizons", "year": 2020, "price": 59.99},
+    {"name": "Genshin Impact", "year": 2020, "price": 0.00},
+    {"name": "The Legend of Zelda: Breath of the Wild", "year": 2017, "price": 59.99},
+    {"name": "Super Mario Odyssey", "year": 2017, "price": 59.99},
+    {"name": "Call of Duty: Warzone", "year": 2020, "price": 0.00},
+    {"name": "Battlefield V", "year": 2018, "price": 49.99},
+    {"name": "FIFA 22", "year": 2021, "price": 59.99},
+    {"name": "Madden NFL 22", "year": 2021, "price": 59.99},
+    {"name": "Fall Guys: Ultimate Knockout", "year": 2020, "price": 19.99},
+    {"name": "Rocket League", "year": 2015, "price": 0.00},
+    {"name": "Cuphead", "year": 2017, "price": 19.99},
+    {"name": "Resident Evil Village", "year": 2021, "price": 59.99},
+    {"name": "Resident Evil 2", "year": 2019, "price": 39.99},
+    {"name": "Control", "year": 2019, "price": 29.99},
+    {"name": "Outer Wilds", "year": 2019, "price": 24.99},
+    {"name": "Horizon Zero Dawn", "year": 2017, "price": 49.99},
+    {"name": "Destiny 2", "year": 2017, "price": 0.00},
+    {"name": "Far Cry 6", "year": 2021, "price": 59.99},
+    {"name": "Dragon Ball Z: Kakarot", "year": 2020, "price": 49.99},
+]
 kill_programing = False
 menu_list = """
     MENU DE OPÇÕES:
@@ -22,6 +63,7 @@ update_list = """
 
 def handle_add_game():
     os.system("clear")
+    print(f"Espaços vazios na sua lista {50 - len(games)}")
     name = input("Nome do game: ")
     year = int(input("Ano de lançamento: "))
     price = float(input("Preço do game: "))
