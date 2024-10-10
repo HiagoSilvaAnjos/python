@@ -9,7 +9,15 @@ menu_list = """
     3. Imprimir todos os games cadastrados
     4. Imprimir um trecho específico da lista de games
     5. Remover game de sua lista
-    6. Sair do sistema
+    6. Atualizar um game na lista
+    7. Sair do sistema
+"""
+
+update_list = """
+    Opções:
+    1. Nome
+    2. Ano de lançamento
+    3. Preço
 """
 
 def handle_add_game():
@@ -95,6 +103,41 @@ def remove_game_to_list():
             return
     print("Game não encontrado.")
 
+def update_game_to_list():
+    os.system("clear")
+    
+    if not games:
+        return print("Lista de games vazia...")
+
+    game_name = input("Digite o nome do game a atualizar: ")
+    len_list = len(games)
+    
+    for game_index in range(len_list):
+        current_game = games[game_index]
+        if current_game["name"].lower() == game_name.lower():
+
+            print(update_list)
+            input_update = input("Campo que deseja Atualizar: ")
+            
+            if input_update == "1":
+                current_game["name"] = input("Novo nome do game: ")
+                print(f"Game atualizado com sucesso: {current_game}")
+                return
+            
+            if input_update == "2":
+                current_game["year"] = int(input("Novo ano de lançamento do game: "))
+                print(f"Game atualizado com sucesso: {current_game}")
+                return
+            
+            if input_update == "3":
+                current_game["price"] = float(input("Novo preço do game: "))
+                print(f"Game atualizado com sucesso: {current_game}")
+                return
+            
+            return print("Opção inválida.")
+            
+    print("Game não encontrado.")
+
 while not kill_programing:
     print(menu_list)
     option = input("Escolha uma opção: ")
@@ -136,9 +179,16 @@ while not kill_programing:
         except Exception as e:
             print("Você inseriu dados inválidos! Por favor, tente novamente...")
             print(e)
-            continue           
+            continue  
 
     if option == "6":
+        try:
+            update_game_to_list()
+        except Exception as e:
+            print("Você inseriu dados inválidos! Por favor, tente novamente...")
+            print(e)         
+
+    if option == "7":
         os.system("clear")
         kill_programing = True
         print("Saindo do sistema...")
