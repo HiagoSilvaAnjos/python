@@ -1,11 +1,13 @@
+# Inicializando as matrizes 3x3
 matriz = [[0, 0, 0], 
-          [0, 0, 0],
+          [0, 0, 0], 
           [0, 0, 0]]
 
 matriz2 = [[0, 0, 0],
-           [0 ,0, 0],
+           [0 ,0, 0], 
            [0, 0, 0]]
 
+# Entrada de dados para a Matriz A e B
 for linhas in range(0, 3):
     for colunas in range(0, 3):
         numero = int(input(f"[MATRIZ A] Digite o número para a posição [{linhas},{colunas}]: "))
@@ -13,38 +15,76 @@ for linhas in range(0, 3):
 
 for linhas in range(0, 3):
     for colunas in range(0, 3):
-        numero = int(input(f"[MATRIZ b] Digite o número para a posição [{linhas},{colunas}]: "))
+        numero = int(input(f"[MATRIZ B] Digite o número para a posição [{linhas},{colunas}]: "))
         matriz2[linhas][colunas] = numero
 
 ################################################################
-#FIXME: Resultados
-print()
-
-print(f"Matriz A")
+# Exibindo as matrizes
+print("\nMatriz A:")
 for linhas in range(0, 3): 
     for colunas in range(0, 3):
-        print(matriz[linhas][colunas], end=" | ",)
+        print(matriz[linhas][colunas], end=" | ")
     print()
 
-print(f"Matriz B")
+print("\nMatriz B:")
 for linhas in range(0, 3):
     for colunas in range(0, 3):
-        print(matriz2[linhas][colunas], end=" | ",)
+        print(matriz2[linhas][colunas], end=" | ")
     print()
 
-# Multiplicando as matrizes
-resultado = [[0 for _ in range(3)] for _ in range(3)] # [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-                                                        
-print(resultado)
+################################################################
+# Somando as matrizes
+soma = [[0 for _ in range(3)] for _ in range(3)]
+
+for i in range(3): 
+    for j in range(3): 
+        soma[i][j] = matriz[i][j] + matriz2[i][j]
+
+# Exibindo o resultado da soma
+print("\nResultado da Soma:")
+for linha in soma:
+    for num in linha:
+        print(num, end=" | ")
+    print()
+
+################################################################
+# Multiplicação de matrizes 3x3
+resultado_mult = [[0 for _ in range(3)] for _ in range(3)]
 
 for i in range(3): 
     for j in range(3): 
         for k in range(3): 
-            resultado[i][j] += matriz[i][k] * matriz2[k][j]
+            resultado_mult[i][j] += matriz[i][k] * matriz2[k][j]
 
-# Exibindo o resultado da multiplicação
-print("\nResultado da Multiplicação:")
-for linha in resultado:
+# Exibindo o resultado da multiplicação 3x3
+print("\nResultado da Multiplicação 3x3:")
+for linha in resultado_mult:
     for num in linha:
         print(num, end=" | ")
-    print()  
+    print()
+
+################################################################
+# Multiplicação de matrizes 3x2
+# Exemplo de matriz B (3x2)
+matriz2_3x2 = [[0, 0], 
+               [0, 0], 
+               [0, 0]]
+
+for linhas in range(0, 3):
+    for colunas in range(0, 2):
+        numero = int(input(f"[MATRIZ B 3x2] Digite o número para a posição [{linhas},{colunas}]: "))
+        matriz2_3x2[linhas][colunas] = numero
+
+resultado_mult_3x2 = [[0 for _ in range(2)] for _ in range(3)] # Resultado será 3x2
+
+for i in range(3): 
+    for j in range(2): 
+        for k in range(3): 
+            resultado_mult_3x2[i][j] += matriz[i][k] * matriz2_3x2[k][j]
+
+# Exibindo o resultado da multiplicação 3x2
+print("\nResultado da Multiplicação 3x2:")
+for linha in resultado_mult_3x2:
+    for num in linha:
+        print(num, end=" | ")
+    print()
