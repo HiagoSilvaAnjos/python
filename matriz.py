@@ -64,6 +64,18 @@ for linha in resultado_mult:
     print()
 
 ################################################################
+# Extraindo a diagonal principal da matriz A
+diagonal_principal = []
+for i in range(3):
+    diagonal_principal.append(matriz[i][i])
+
+# Exibindo a diagonal principal
+print("\nDiagonal Principal da Matriz A:")
+for num in diagonal_principal:
+    print(num, end=" | ")
+print()
+
+################################################################
 # Multiplicação de matrizes 3x2
 # Exemplo de matriz B (3x2)
 matriz2_3x2 = [[0, 0], 
