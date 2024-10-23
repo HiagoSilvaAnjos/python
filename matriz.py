@@ -87,6 +87,11 @@ for linhas in range(0, 3):
         numero = int(input(f"[MATRIZ B 3x2] Digite o número para a posição [{linhas},{colunas}]: "))
         matriz2_3x2[linhas][colunas] = numero
 
+for linha in matriz2_3x2:
+    for coluna in linha:
+        print(coluna, end=" | ")
+    print()
+
 resultado_mult_3x2 = [[0 for _ in range(2)] for _ in range(3)] # Resultado será 3x2
 
 for i in range(3): 
@@ -100,3 +105,11 @@ for linha in resultado_mult_3x2:
     for num in linha:
         print(num, end=" | ")
     print()
+
+################################################################
+# Tentativa de extrair a "diagonal" da matriz multiplicada 3x2
+# Aqui, a diagonal só pode existir até o segundo elemento [0,0] e [1,1]
+print("\nDiagonal da Matriz Multiplicada (até onde possível):")
+for i in range(min(2, len(resultado_mult_3x2))):
+    print(resultado_mult_3x2[i][i], end=" | ")
+print()
