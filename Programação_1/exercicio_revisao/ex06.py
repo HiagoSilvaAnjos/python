@@ -29,7 +29,6 @@ while not kill_programing:
 
     try:
         nome, numero = entrada.split()
-        print(nome, numero)
         numero = int(numero)
     except:
         os.system("clear")  
