@@ -12,6 +12,8 @@
 # o número de pedidos de reserva não atendidos. Por fim, o vetor e o número de pedidos não
 # atendidos devem ser exibidos na saída padrão.
 
+import os
+
 onibus = ["disponivel"] * 8
 pedidos_nao_atendidos = 0
 kill_programing = False
@@ -23,16 +25,20 @@ while not kill_programing:
     
     if entrada == "fim -1":
         kill_programing = True
+        continue
 
     try:
         nome, numero = entrada.split()
+        print(nome, numero)
         numero = int(numero)
-    except ValueError:
+    except:
+        os.system("clear")  
         print("Entrada inválida! Use: <nome> <número>")
         continue
 
     if numero < 0 or numero > 7:
         print("Número inválido! Insira um valor entre 0 e 7.")
+        os.system("clear")
         continue
 
     if onibus[numero] == "disponivel":
@@ -41,6 +47,7 @@ while not kill_programing:
         pedidos_nao_atendidos += 1
         print("Ônibus indisponível!")
 
-print("\nTabela de Ônibus:")
+os.system("clear")
+print("Tabela de Ônibus:")
 print(onibus)
 print("Pedidos de reserva não atendidos:", pedidos_nao_atendidos)
