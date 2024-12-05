@@ -36,8 +36,8 @@ while not kill_programing:
         continue
 
     if numero < 0 or numero > 7:
-        print("Número inválido! Insira um valor entre 0 e 7.")
         os.system("clear")
+        print("Número inválido! Insira um valor entre 0 e 7.")
         continue
 
     if onibus[numero] == "disponivel":
