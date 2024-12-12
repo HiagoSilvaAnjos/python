@@ -1,5 +1,6 @@
 def calculateFatorial(value):
     if value < 0:
+        # Lançamento de Exceção
         raise ValueError("O fatorial não é definido para números negativos.")
     fatorial = 1
     for i in range(1, value + 1):
