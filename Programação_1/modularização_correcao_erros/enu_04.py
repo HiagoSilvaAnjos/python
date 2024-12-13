@@ -23,23 +23,23 @@
 
 # 10
 
-def gerar_sequencia(num, quantidade_ref):
-    sequencia = []  
-    while num != 1:
-        sequencia.append(num)
-        if num % 2 == 0:  
-            num //= 2
-        else:  
-            num = 3 * num + 1
-    sequencia.append(1)  
-    quantidade_ref[0] = len(sequencia)  
-    return sequencia
+def generate_sequence(number, quantity_interations_number):
+    sequence = []
+    while number != 1:
+        sequence.append(number)
+        if number % 2 == 0:
+            number = number // 2
+        else:
+            number = 3 * number + 1
+    sequence.append(1)
+    quantity_interations_number[0] = len(sequence)
+    return sequence
 
 number_input = int(input("Digite um número positivo inteiro: "))
 if number_input <= 0:
-    print("Por favor, insira um número positivo!")
+    print("Por favor! Digite apenas números positivos inteiros")
 else:
-    quantidade = [0]  
-    sequencia = gerar_sequencia(number_input, quantidade)
-    for i in sequencia: print(i, end=" ")
-    print("Quantidade de números na sequência:", quantidade[0])
+    quantity_interations_number = [0]
+    sequence = generate_sequence(number_input, quantity_interations_number)
+    for i in sequence: print(i, end=" ")
+    print(f"Quantidade de números na sequencia: {quantity_interations_number}")
