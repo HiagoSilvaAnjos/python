@@ -6,4 +6,4 @@ def sum_of_cubes(n):
     return n**3 + sum_of_cubes(n - 1)  # Chamada recursiva
 
 # Exemplo de uso
-print(sum_of_cubes(4))  # Saída: 100 (1^3 + 2^3 + 3^3 + 4^3 = 100)
+print(sum_of_cubes(4))  # Saída: 100 (1^3 + 2^3 + 3^3 + 4^3 = 100) | (64 + (27 + (8 + 1))) = 100
