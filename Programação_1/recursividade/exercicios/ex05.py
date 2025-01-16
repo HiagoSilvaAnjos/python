@@ -10,3 +10,24 @@ base = 2
 exponent = 5
 print(power(base, exponent))  # Saída: 32 (2^5 = 32)
 
+(
+    # Recursão
+    # base * power(base, exponent - 1)
+    # 2 * power(2, 4)
+    # 2 * power(2, 3) 
+    # 2 * power(2, 2) 
+    # 2 * power(2, 1) 
+    # 2 * power(2, 0) 
+    # Caso base: 1
+
+    # 2 * 16 = 32
+    # 2 * 8 = 16
+    # 2 * 4 = 8
+    # 2 * 2 = 4
+    # 2 * 1 = 2
+    # 1
+
+    # 2 * (2 * (2 * (2 * (2 * 1)))) = 32
+)
+
+# 2^5 = 32

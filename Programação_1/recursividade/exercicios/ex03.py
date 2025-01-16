@@ -7,3 +7,21 @@ def sum_vector(vetor):
 
 vetor = [1, 2, 3, 4, 5]
 print(sum_vector(vetor))  # Saída: 15   
+
+(
+    # Recursão
+    # vetor[0] + sum_vector(vetor[1:])
+    # 1 + sum_vector([2, 3, 4, 5])
+    # 2 + sum_vector([3, 4, 5])
+    # 3 + sum_vector([4, 5])
+    # 4 + sum_vector([5])
+    # 5 + sum_vector([])  # Vetor vazio retorna 0
+
+    # 1 + 14 = 15
+    # 2 + 12 = 14
+    # 3 + 9 = 12
+    # 4 + 5 = 9
+    # 5 + 0 = 5
+
+    (1 + (2 + (3 + (4 + 5))))  # 15
+)

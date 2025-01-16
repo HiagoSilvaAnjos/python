@@ -7,3 +7,18 @@ def sum_of_cubes(n):
 
 # Exemplo de uso
 print(sum_of_cubes(4))  # Saída: 100 (1^3 + 2^3 + 3^3 + 4^3 = 100) | (64 + (27 + (8 + 1))) = 100
+
+(
+    # Recursão
+    # 4^3 + sum_of_cubes(4-1 = 3)
+    # 3^3 + sum_of_cubes(3-1 = 2)
+    # 2^3 + sum_of_cubes(2-1 = 1)
+    # 1
+
+    # 64 + 36 = 100
+    # 27 + 9 = 36
+    # 8 + 1 = 9
+    # 1
+
+    (64 + (27 + (8 + 1))) # 100
+)
