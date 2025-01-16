@@ -26,7 +26,7 @@ print(fatorial(5))  # Saída: 120
 # Pilha de chamadas: Cada chamada recursiva consome memória, pois é armazenada na pilha. Funções muito profundas podem gerar o erro RecursionError em Python.
 # Eficiência: Em alguns casos, uma abordagem iterativa pode ser mais eficiente e consumir menos recursos.
 
-#FIXME: USO COMUN:
+#FIXME: USO COMUM:
 # Recursividade é amplamente utilizada em algoritmos de:
 # Estruturas de dados (ex.: árvores e grafos)
 # Busca e ordenação
