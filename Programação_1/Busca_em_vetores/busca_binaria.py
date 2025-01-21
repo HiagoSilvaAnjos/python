@@ -9,17 +9,17 @@ try:
 
     while start<=finish and not found: 
 
-        meio = (start + finish)//2
-        if vetor_list[meio] == value_input:
+        meio_vetor = (start + finish)//2
+        if vetor_list[meio_vetor] == value_input:
             found=True
         else:
-            if value_input < vetor_list[meio]:
-                finish = meio-1
+            if value_input < vetor_list[meio_vetor]:
+                finish = meio_vetor-1
             else:
-                start=meio+1
+                start=meio_vetor+1
 
     if found:
-        print(f"Encontrado: {found} | Valor: {vetor_list[meio]} | Indice: {meio}")
+        print(f"Encontrado: {found} | Valor: {vetor_list[meio_vetor]} | Indice: {meio_vetor}")
     else:
         print(f"Não Encontrado")
 except:
