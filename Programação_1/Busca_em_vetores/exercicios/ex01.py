@@ -27,12 +27,15 @@ def obter_lista():
     except:
         print("Entrada inválida. Digite um número inteiro.")
         return None
+    
+# [1, 2, 3 , 4, 5]
+# 2
 
 def busca_binaria(vetor_list, value_search):
     start = 0
     found = False
     counter_search = 0
-    finish = len(vetor_list) - 1
+    finish = len(vetor_list) - 1 #4 #1
 
     while start <= finish and not found:
         meio = (start + finish) // 2
