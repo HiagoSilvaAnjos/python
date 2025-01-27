@@ -30,20 +30,44 @@ def obter_lista():
     except:
         print("Entrada inválida. Digite um número inteiro.")
         return None
-    
-def test_word(list_words):
-    quantity_de_nominais_apareceu_mais_vezes = 0
-    total_letras_maior_nominal = 0
-    total_cosoantes_menor_palavras_gerundio = 0 #ndo
 
-    list_nominais = []
+def contar_consoantes(palavra):
+    consoantes = "bcdfghjklmnpqrstvwxyz"
+    counter = 0
+    for letra in palavra:
+        if letra in consoantes:
+            counter += 1
+    return counter
 
+def quantity_to_words_nominais_frequency(list_words):
+    contadores = {
+        "infinitivo": 0,  # Termina em "r"
+        "gerundio": 0,    # Termina em "ndo"
+        "participio": 0   # Outros casos
+    }
+
+    maior_infinitivo = ""
+    menor_gerundio = None
+
+    # Processamento das palavras
     for palavra in list_words:
-        if "ndo" in palavra or palavra[-1] == "r":
-            list_nominais.append(palavra)
+        if palavra.endswith("r"):
+            contadores["infinitivo"] += 1
+            if len(palavra) > len(maior_infinitivo):
+                maior_infinitivo = palavra
+        elif palavra.endswith("ndo"):
+            contadores["gerundio"] += 1
+            if menor_gerundio is None or len(palavra) < len(menor_gerundio):
+                menor_gerundio = palavra
+        else:
+            contadores["participio"] += 1
 
+    forma_mais_frequente = max(contadores.values())
+    tamanho_maior_infinitivo = len(maior_infinitivo)
+    consoantes_menor_gerundio = contar_consoantes(menor_gerundio)
 
-    return print(list_nominais)
+    return forma_mais_frequente, tamanho_maior_infinitivo, consoantes_menor_gerundio
+
     
 def main():
     vetor_list = obter_lista()
@@ -51,10 +75,10 @@ def main():
         return
 
     try:
-        
-        test_word(vetor_list)
-
-        
+        forma_mais_frequente, tamanho_maior_infinitivo , consoantes_menor_gerundio = quantity_to_words_nominais_frequency(vetor_list)
+        print(forma_mais_frequente)
+        print(tamanho_maior_infinitivo)
+        print(consoantes_menor_gerundio)
 
     except Exception as e:
         print("Entrada inválida. Digite um número inteiro.")
