@@ -1,0 +1,1 @@
+# ● Faça um programa para contabilizar as linhas de um arquivo.
