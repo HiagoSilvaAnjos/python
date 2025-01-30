@@ -1,5 +1,4 @@
 import spacy
-from collections import defaultdict
 
 # Carregar modelo do spaCy
 nlp = spacy.load("pt_core_news_sm")
@@ -20,11 +19,13 @@ def extrair_palavras_chave(sentenca):
 
 def calcular_similaridade(sent1, sent2):
     """Calcula a similaridade entre duas sentenças com base nas palavras-chave."""
-    palavras1 = set(extrair_palavras_chave(sent1))
-    palavras2 = set(extrair_palavras_chave(sent2))
+    palavras1 = extrair_palavras_chave(sent1)
+    palavras2 = extrair_palavras_chave(sent2)
     if not palavras1 or not palavras2:
         return 0
-    return len(palavras1 & palavras2) / len(palavras1 | palavras2)
+    interseccao = len([p for p in palavras1 if p in palavras2])
+    uniao = len(palavras1) + len(palavras2) - interseccao
+    return interseccao / uniao if uniao > 0 else 0
 
 def agrupar_sentencas(sentencas, limite_similaridade=0.3):
     """Agrupa sentenças semelhantes em subtópicos com base na similaridade."""
@@ -32,23 +33,47 @@ def agrupar_sentencas(sentencas, limite_similaridade=0.3):
     for sentenca in sentencas:
         adicionada = False
         for grupo in grupos:
-            if any(calcular_similaridade(sentenca, s) >= limite_similaridade for s in grupo):
-                grupo.append(sentenca)
-                adicionada = True
-                break
+            for s in grupo:
+                similaridade = calcular_similaridade(sentenca, s)
+                if similaridade >= limite_similaridade:
+                    grupo.append(sentenca)
+                    adicionada = True
         if not adicionada:
             grupos.append([sentenca])
+    
     return grupos
 
 def gerar_rotulo(grupo):
     """Gera um rótulo de até 5 palavras-chave para um grupo de sentenças."""
-    palavras = [extrair_palavras_chave(sent) for sent in grupo]
-    palavras_flat = [p for sublist in palavras for p in sublist]
-    frequencia = defaultdict(int)
-    for palavra in palavras_flat:
-        frequencia[palavra] += 1
-    palavras_ordenadas = sorted(frequencia, key=frequencia.get, reverse=True)
-    return palavras_ordenadas[:5]
+    palavras = []
+    for sentenca in grupo:
+        palavras.extend(extrair_palavras_chave(sentenca))
+
+    frequencia = {}
+    for palavra in palavras:
+        if palavra in frequencia:
+            frequencia[palavra] += 1
+        else:
+            frequencia[palavra] = 1
+
+    # Ordenação manual sem uso de max ou sorted
+    palavras_ordenadas = []
+    while frequencia:
+        palavra_mais_frequente = None
+        frequencia_mais_alta = 0
+        
+        # Procurar a palavra com a maior frequência manualmente
+        for palavra, freq in frequencia.items():
+            if freq > frequencia_mais_alta:
+                palavra_mais_frequente = palavra
+                frequencia_mais_alta = freq
+
+        palavras_ordenadas.append(palavra_mais_frequente)
+        del frequencia[palavra_mais_frequente]  # Remove a palavra da contagem
+
+    # Pegando as 5 palavras mais frequentes
+    rotulo = palavras_ordenadas[:5]
+    return rotulo
 
 def salvar_saida(grupos, nome_arquivo):
     """Salva os subtópicos e rótulos em um arquivo de saída."""
