@@ -7,9 +7,6 @@ from nltk.stem import PorterStemmer
 from nltk.probability import FreqDist
 from nltk.corpus import wordnet
 
-# Buscar sinônimos em pt-br
-from nltk.corpus import wordnet as wn
-
 # Baixar os recursos necessários do NLTK
 nltk.download('omw-1.4')
 nltk.download('punkt_tab')
