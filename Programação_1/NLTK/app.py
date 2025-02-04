@@ -42,6 +42,18 @@ print("Palavras filtradas:", palavras_filtradas)
 
 print()
 
+
+"""
+FIXME:
+Stemming é uma técnica de Processamento de Linguagem Natural (PLN) usada para reduzir palavras à sua raiz (ou stem), removendo sufixos e prefixos. Isso ajuda a normalizar palavras diferentes que compartilham o mesmo significado base.
+
+Por exemplo:
+
+"running" → "run"
+"studies" → "studi"
+"better" → "better" (algumas palavras podem não ser alteradas)
+Essa técnica é útil em buscas e indexação de textos, pois reduz a variação das palavras, facilitando a correspondência entre termos semelhantes.
+"""
 # Stemming
 ps = PorterStemmer()
 palavras_stemmed = [ps.stem(palavra) for palavra in palavras_filtradas]
@@ -52,11 +64,11 @@ print()
 # Frequência das palavras
 frequencia = FreqDist(palavras_filtradas)
 print("Frequência das palavras:", frequencia.most_common())
-
-#FIXME: O WordNet é um banco de dados lexical da língua inglesa, disponível no nltk, que organiza palavras em conjuntos de sinônimos chamados "synsets" (synonym sets). Ele fornece relações semânticas entre palavras, incluindo sinônimos, antônimos, hiperônimos (termos mais genéricos), hipônimos (termos mais específicos), entre outros.
-
 print()
 
+"""
+FIXME: O WordNet é um banco de dados lexical da língua inglesa, disponível no nltk, que organiza palavras em conjuntos de sinônimos chamados "synsets" (synonym sets). Ele fornece relações semânticas entre palavras, incluindo sinônimos, antônimos, hiperônimos (termos mais genéricos), hipônimos (termos mais específicos), entre outros.
+"""
 # Sinônimos usando WordNet
 sinonimos = set()
 
