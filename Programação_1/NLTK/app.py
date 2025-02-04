@@ -1,5 +1,8 @@
 # pip install nltk
 
+import spacy
+
+
 import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
@@ -13,10 +16,15 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-# Texto de exemplo
-texto = """A ginasta Jade Barbosa, que obteve três medalhas nos Jogos Pan-Americanos do Rio, em julho, venceu votação na internet e será a representante brasileira no revezamento da tocha olímpica para Pequim-2008. A tocha passará por vinte países, mas o Brasil não estará no percurso olímpico. Por isso, Jade participará do evento em Buenos Aires, na Argentina, única cidade da América do Sul a receber o símbolo dos Jogos.
-O revezamento terminará em 8 de agosto, primeiro dia das Olimpíadas de Pequim."""
+texto = ""
 
+# Texto de exemplo
+try:
+    with open("/home/savio/Documentos/curso-python/Programação_1/NLTK/input.txt", "r", encoding="utf-8") as file:
+        texto = file.read()
+
+except FileNotFoundError:
+    print("Arquivo não encontrado")
 print()
 
 # Tokenização de sentenças
@@ -28,6 +36,21 @@ print()
 # Tokenização de palavras
 palavras = word_tokenize(texto)
 print("Palavras:", palavras)
+print()
+
+
+# POS Tagging - Usando o Spacy
+# Carregar o modelo pré-treinado em português
+nlp = spacy.load("pt_core_news_sm")
+
+# Processar o texto
+for text_item in sentencas:
+    print(f"Sentença: '{text_item}'")
+    doc = nlp(text_item)
+    print("Tokens e suas propriedades:")
+    for token in doc:
+        print(f"Texto: {token.text}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
+    print()
 
 print()
 

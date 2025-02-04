@@ -17,36 +17,36 @@ print("Tokens e suas propriedades:")
 for token in doc:
     print(f"Texto: {token.text}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
 
-# Entidades nomeadas
-print("\nEntidades nomeadas:")
-for ent in doc.ents:
-    print(f"Texto: {ent.text}, Rótulo: {ent.label_}")
+# # Entidades nomeadas
+# print("\nEntidades nomeadas:")
+# for ent in doc.ents:
+#     print(f"Texto: {ent.text}, Rótulo: {ent.label_}")
 
-# Frases
-print("\nFrases:")
-for sent in doc.sents:
-    print(sent.text)
+# # Frases
+# print("\nFrases:")
+# for sent in doc.sents:
+#     print(sent.text)
 
-# Função para extrair informações de um texto
-def extrair_informacoes(texto):
-    doc = nlp(texto)
-    tokens = [(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.head.text) for token in doc]
-    entidades = [(ent.text, ent.label_) for ent in doc.ents]
-    frases = [sent.text for sent in doc.sents]
-    return tokens, entidades, frases
+# # Função para extrair informações de um texto
+# def extrair_informacoes(texto):
+#     doc = nlp(texto)
+#     tokens = [(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.head.text) for token in doc]
+#     entidades = [(ent.text, ent.label_) for ent in doc.ents]
+#     frases = [sent.text for sent in doc.sents]
+#     return tokens, entidades, frases
 
-# Exemplo de uso da função
-texto_exemplo = "Albert Einstein foi um físico teórico que desenvolveu a teoria da relatividade."
-tokens, entidades, frases = extrair_informacoes(texto_exemplo)
+# # Exemplo de uso da função
+# texto_exemplo = "Albert Einstein foi um físico teórico que desenvolveu a teoria da relatividade."
+# tokens, entidades, frases = extrair_informacoes(texto_exemplo)
 
-print("\nTokens extraídos:")
-for token in tokens:
-    print(token)
+# print("\nTokens extraídos:")
+# for token in tokens:
+#     print(token)
 
-print("\nEntidades extraídas:")
-for entidade in entidades:
-    print(entidade)
+# print("\nEntidades extraídas:")
+# for entidade in entidades:
+#     print(entidade)
 
-print("\nFrases extraídas:")
-for frase in frases:
-    print(frase)
+# print("\nFrases extraídas:")
+# for frase in frases:
+#     print(frase)
