@@ -28,13 +28,13 @@ except FileNotFoundError:
 print()
 
 # Tokenização de sentenças
-sentencas = sent_tokenize(texto)
+sentencas = sent_tokenize(texto.lower())
 print("Sentenças:", sentencas)
 
 print()
 
 # Tokenização de palavras
-palavras = word_tokenize(texto)
+palavras = word_tokenize(texto.lower())
 print("Palavras:", palavras)
 print()
 
