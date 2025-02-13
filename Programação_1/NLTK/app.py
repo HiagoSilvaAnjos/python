@@ -35,7 +35,8 @@ print()
 
 # Tokenização de palavras
 palavras = word_tokenize(texto.lower())
-print("Palavras:", palavras)
+palavras_sem_pontuacao = [palavra for palavra in palavras if palavra.isalnum()]
+print("Palavras:", palavras_sem_pontuacao)
 print()
 
 
@@ -49,7 +50,8 @@ for text_item in sentencas:
     doc = nlp(text_item)
     print("Tokens e suas propriedades:")
     for token in doc:
-        print(f"Texto: {token.text}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
+        if token.text.isalnum():
+            print(f"Texto: '{token.text}', Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
     print()
 
 print()
@@ -60,7 +62,7 @@ print("Stopwords:", stop_words)
 
 print()
 
-palavras_filtradas = [palavra for palavra in palavras if palavra.lower() not in stop_words]
+palavras_filtradas = [palavra for palavra in palavras if palavra.lower() not in stop_words and palavra.lower().isalnum()]
 print("Palavras filtradas:", palavras_filtradas)
 
 print()
