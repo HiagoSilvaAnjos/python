@@ -46,12 +46,12 @@ nlp = spacy.load("pt_core_news_sm")
 
 # Processar o texto
 for text_item in sentencas:
-    print(f"Sentença: '{text_item}'")
+    print(f"Sentença: '{text_item}' Tamanho: {len(text_item)}")
     doc = nlp(text_item)
     print("Tokens e suas propriedades:")
     for token in doc:
         if token.text.isalnum():
-            print(f"Texto: '{token.text}', Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
+            print(f"Texto: '{token.text}', Tamanho: {len(token.text)}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
     print()
 
 print()
