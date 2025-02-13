@@ -49,6 +49,7 @@ for text_item in sentencas:
     print(f"Sentença: '{text_item}' Tamanho: {len(text_item)}")
     doc = nlp(text_item)
     print("Tokens e suas propriedades:")
+    print()
     for token in doc:
         if token.text.isalnum():
             print(f"Texto: '{token.text}', Tamanho: {len(token.text)}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
@@ -58,7 +59,7 @@ print()
 
 # Remoção de stopwords
 stop_words = set(stopwords.words('portuguese'))
-print("Stopwords:", stop_words)
+print("Stopwords:", stop_words, "Tamanho:", len(stop_words))
 
 print()
 
