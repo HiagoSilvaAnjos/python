@@ -51,6 +51,7 @@ for text_item in sentencas:
     print("Tokens e suas propriedades:")
     print()
     for token in doc:
+        print(doc.similarity(token))
         if token.text.isalnum():
             print(f"Texto: '{token.text}', Tamanho: {len(token.text)}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
     print()
