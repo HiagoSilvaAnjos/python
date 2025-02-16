@@ -159,3 +159,11 @@ for sentenca in lista_sentecas:
     print(Fore.YELLOW + f"Sinônimos da sentença {sentenca['paragrafo']}:")
     sinonimos_lista = list(sinonimos_sentenca)
     print(Fore.WHITE + f"{sinonimos_lista}")
+
+#Similaridade entre palavras
+def filtrar_tokens(text):
+    texto_filtrado = " ".join([token.text for token in text if token.pos_ in ["NOUN", "VERB"]]) #NOUN => Subtantivo e VERB => Verbo
+    return nlp(texto_filtrado)
+
+sentencas_filtradas = [(sent["paragrafo"], filtrar_tokens(nlp(sent["sentenca"]))) for sent in lista_sentecas]
+print(Fore.CYAN + Style.BRIGHT + f"Sentenças Filtradas:  {sentencas_filtradas}")
