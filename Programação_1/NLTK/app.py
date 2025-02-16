@@ -1,74 +1,98 @@
 # pip install nltk
 # pip install spacy
+# pip install colorama
+# python -m spacy download pt_core_news_sm
+
+# IMPORTANDO AS LIBS
 import spacy
-
-
 import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.probability import FreqDist
 from nltk.corpus import wordnet
+from colorama import Fore, Style, init
+
+# Inicializa o colorama para Windows
+init(autoreset=True)
 
 # Baixar os recursos necessários do NLTK
 nltk.download('omw-1.4')
-nltk.download('punkt_tab')
+nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
 texto = ""
 
-# Texto de exemplo
+# FIXME: Windows
 try:
-    with open("/home/savio/Documentos/curso-python/Programação_1/NLTK/input.txt", "r", encoding="utf-8") as file:
+    with open("C:\\Users\\Hiago Silva\\Documents\\python\\Programação_1\\NLTK\\input.txt", "r", encoding="utf-8") as file:
         texto = file.read()
 
 except FileNotFoundError:
-    print("Arquivo não encontrado")
+    print(Fore.RED + "Arquivo não encontrado")
 print()
+
+lista_sentecas = []
 
 # Tokenização de sentenças
 sentencas = sent_tokenize(texto.lower())
-print("Sentenças:", sentencas)
 
+# Criar uma lista separada para cada sentença
+for indice in range(len(sentencas)):
+    lista_sentecas.append({"sentenca": sentencas[indice], "paragrafo": indice + 1})
+
+print(Fore.CYAN + Style.BRIGHT + "Tokenização de Sentenças:")
+for list in lista_sentecas:
+    print(Fore.YELLOW + f"Parágrafo {list['paragrafo']}: " + Fore.WHITE + list["sentenca"])
 print()
 
 # Tokenização de palavras
 palavras = word_tokenize(texto.lower())
 palavras_sem_pontuacao = [palavra for palavra in palavras if palavra.isalnum()]
-print("Palavras:", palavras_sem_pontuacao)
+
+print(Fore.CYAN + Style.BRIGHT + "Tokenização de Palavras (Geral):")
+print(Fore.WHITE + str(palavras_sem_pontuacao))
 print()
 
+# Tokenização de palavras em cada sentença
+for sentence in lista_sentecas:
+    palavras_tokenizadas = word_tokenize(sentence["sentenca"].lower())
+    palavras_sem_pontuacao = [palavra for palavra in palavras_tokenizadas if palavra.isalnum()]
+    print(Fore.CYAN + Style.BRIGHT + f"Palavras Tokenizadas da lista {sentence['paragrafo']}:")
+    print(palavras_sem_pontuacao)
+    print()
+print()
 
 # POS Tagging - Usando o Spacy
-# Carregar o modelo pré-treinado em português
-nlp = spacy.load("pt_core_news_sm")
+nlp = spacy.load("pt_core_news_lg")
 
-# Processar o texto
-for text_item in sentencas:
-    print(f"Sentença: '{text_item}' Tamanho: {len(text_item)}")
-    doc = nlp(text_item)
-    print("Tokens e suas propriedades:")
-    print()
+print(Fore.MAGENTA + Style.BRIGHT + "Análise POS Tagging (Spacy):")
+for text_item in lista_sentecas:
+    doc = nlp(text_item['sentenca'])
+    print(Fore.YELLOW + f"Sentença {text_item['paragrafo']}: " + Fore.WHITE + text_item['sentenca'])
     for token in doc:
-        print(doc.similarity(token))
         if token.text.isalnum():
-            print(f"Texto: '{token.text}', Tamanho: {len(token.text)}, Lema: {token.lemma_}, POS: {token.pos_}, Tag: {token.tag_}, Dependência: {token.dep_}, Cabeça: {token.head.text}")
+            print(Fore.GREEN + f"  Texto: {token.text}, Lema: {token.lemma_}, POS: {token.pos_}")
     print()
-
-print()
 
 # Remoção de stopwords
 stop_words = set(stopwords.words('portuguese'))
-print("Stopwords:", stop_words, "Tamanho:", len(stop_words))
+palavras_filtradas_geral = [palavra for palavra in palavras if palavra.lower() not in stop_words and palavra.isalnum()]
 
+print(Fore.CYAN + Style.BRIGHT + "Palavras Filtradas (Sem Stopwords):")
+print(Fore.WHITE + str(palavras_filtradas_geral))
 print()
 
-palavras_filtradas = [palavra for palavra in palavras if palavra.lower() not in stop_words and palavra.lower().isalnum()]
-print("Palavras filtradas:", palavras_filtradas)
-
+# Remoção stopwords de cada sentenca
+for sentenca in lista_sentecas:
+    print(Fore.CYAN + Style.BRIGHT + f"Remoção stopwords de:  {Fore.YELLOW + sentenca['sentenca']}")
+    palavras_tokenizadas = word_tokenize(sentenca["sentenca"].lower())
+    palavras_sem_pontuacao = [palavra for palavra in palavras_tokenizadas if palavra.isalnum()]
+    palavras_filtradas = [palavra for palavra in palavras_sem_pontuacao if palavra not in stop_words]
+    print(Fore.WHITE  +"Palavras filtradas:", palavras_filtradas)
+    print()
 print()
-
 
 """
 FIXME:
@@ -81,48 +105,57 @@ Por exemplo:
 "better" → "better" (algumas palavras podem não ser alteradas)
 Essa técnica é útil em buscas e indexação de textos, pois reduz a variação das palavras, facilitando a correspondência entre termos semelhantes.
 """
+
 # Stemming
 ps = PorterStemmer()
-palavras_stemmed = [ps.stem(palavra) for palavra in palavras_filtradas]
-print("Palavras após stemming:", palavras_stemmed)
+palavras_stemmed = [ps.stem(palavra) for palavra in palavras_filtradas_geral]
 
+print(Fore.CYAN + Style.BRIGHT + "Palavras após Stemming:")
+print(Fore.WHITE + str(palavras_stemmed))
 print()
 
 # Frequência das palavras
-frequencia = FreqDist(palavras_filtradas)
-print("Frequência das palavras:", frequencia.most_common())
+frequencia = FreqDist(palavras_filtradas_geral)
+
+print(Fore.CYAN + Style.BRIGHT + "Frequência das Palavras (Geral):")
+print(Fore.WHITE + str(frequencia.most_common()))
 print()
 
-"""
-FIXME: O WordNet é um banco de dados lexical da língua inglesa, disponível no nltk, que organiza palavras em conjuntos de sinônimos chamados "synsets" (synonym sets). Ele fornece relações semânticas entre palavras, incluindo sinônimos, antônimos, hiperônimos (termos mais genéricos), hipônimos (termos mais específicos), entre outros.
-"""
-# Sinônimos usando WordNet
-sinonimos = set()
+# Frequência das palavras por sentença
+for sentence in lista_sentecas:
+    palavras_tokenizadas = word_tokenize(sentence["sentenca"].lower())
+    palavras_sem_pontuacao = [palavra for palavra in palavras_tokenizadas if palavra.isalnum()]
+    palavras_filtradas = [palavra for palavra in palavras_sem_pontuacao if palavra not in stop_words]
+    
+    frequencia = FreqDist(palavras_filtradas)
 
-#FIXME: pecorrer cada palavra
-for palavra in palavras_filtradas:
-    #FIXME: pecorrer cada synset (conjuntos de sinônimos) da palavra
+    print(Fore.YELLOW + f"Frequência das palavras da sentença {sentence['paragrafo']}:")
+    print(Fore.WHITE + str(frequencia.most_common()))
+    print()
+
+# Sinônimos usando WordNet - Geral
+sinonimos_gerais = set()
+for palavra in palavras_filtradas_geral:
     for syn in wordnet.synsets(palavra, lang="por"):
-        #FIXME: Percorre os sinônimos dentro do synset
         for lemma in syn.lemmas("por"):
-            sinonimos.add(lemma.name()) #FIXME: Adiciona o sinônimo na lista
-print("Sinônimos:", sinonimos)
+            sinonimos_gerais.add(lemma.name())
 
+print(Fore.CYAN + Style.BRIGHT + "Sinônimos Gerais:")
+print(Fore.WHITE + str(sinonimos_gerais))
+print()
 
-# Lista de palavras para buscar sinônimos
-# Lista de palavras em português
-# palavras_filtradas = ["feliz", "rápido", "loja"]
+# Sinônimos de cada sentença
+for sentenca in lista_sentecas:
+    sinonimos_sentenca = set()
+    palavras_tokenizadas = word_tokenize(sentenca["sentenca"].lower())
+    palavras_sem_pontuacao = [palavra for palavra in palavras_tokenizadas if palavra.isalnum()]
+    palavras_filtradas = [palavra for palavra in palavras_sem_pontuacao if palavra not in stop_words]
 
-# # Criando uma lista para armazenar os sinônimos
-# sinonimos = set()
+    for palavra in palavras_filtradas:
+        for syn in wordnet.synsets(palavra, lang="por"):
+            for lemma in syn.lemmas("por"):
+                sinonimos_sentenca.add(lemma.name())
 
-# # Percorre cada palavra
-# for palavra in palavras_filtradas:
-#     # Obtém os synsets (conjuntos de sinônimos) da palavra em português
-#     for syn in wn.synsets(palavra, lang="por"):  # "por" indica português
-#         # Percorre os sinônimos dentro do synset
-#         for lemma in syn.lemmas("por"):
-#             sinonimos.add(lemma.name())  # Adiciona o nome do sinônimo
-
-# # Exibe os sinônimos únicos
-# print("Sinônimos:", sinonimos)
+    print(Fore.YELLOW + f"Sinônimos da sentença {sentenca['paragrafo']}:")
+    print(Fore.WHITE + str(sinonimos_sentenca))
+    print()
