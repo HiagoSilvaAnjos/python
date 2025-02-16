@@ -43,8 +43,8 @@ for indice in range(len(sentencas)):
     lista_sentecas.append({"sentenca": sentencas[indice], "paragrafo": indice + 1})
 
 print(Fore.CYAN + Style.BRIGHT + "Tokenização de Sentenças:")
-for list in lista_sentecas:
-    print(Fore.YELLOW + f"Parágrafo {list['paragrafo']}: " + Fore.WHITE + list["sentenca"])
+for sentence_list in lista_sentecas:
+    print(Fore.YELLOW + f"Parágrafo {sentence_list['paragrafo']}: " + Fore.WHITE + sentence_list["sentenca"])
 print()
 
 # Tokenização de palavras
@@ -157,5 +157,5 @@ for sentenca in lista_sentecas:
                 sinonimos_sentenca.add(lemma.name())
 
     print(Fore.YELLOW + f"Sinônimos da sentença {sentenca['paragrafo']}:")
-    print(Fore.WHITE + str(sinonimos_sentenca))
-    print()
+    sinonimos_lista = list(sinonimos_sentenca)
+    print(Fore.WHITE + f"{sinonimos_lista}")
