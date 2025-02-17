@@ -2,7 +2,7 @@ import spacy
 
 nlp = spacy.load("pt_core_news_lg")
 
-doc1 = nlp("Arroz tem um gosto muito bom.")
+doc1 = nlp("Cachorros gostam de brincar no parque.")
 doc2 = nlp("Cachorros gostam de brincar no parque.")
 
 print(doc1)
@@ -23,7 +23,7 @@ print(f"Texto filtrado 2: {doc2_filtrado}")
 similaridade_completa = doc1.similarity(doc2)
 
 # Similaridade com frases filtradas
-similaridade_filtrada = doc1_filtrado.similarity(doc2_filtrado)
+similaridade_filtrada = nlp(doc1_filtrado).similarity(nlp(doc2_filtrado))
 
 print(f"Similaridade completa: {similaridade_completa:.2f}")
 print(f"Similaridade filtrada (apenas substantivos e verbos): {similaridade_filtrada:.2f}")
