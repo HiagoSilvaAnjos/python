@@ -26,7 +26,10 @@ texto = ""
 
 # FIXME: Windows
 try:
-    with open("C:\\Users\\Hiago Silva\\Documents\\python\\Programação_1\\NLTK\\input.txt", "r", encoding="utf-8") as file:
+    # with open("C:\\Users\\Hiago Silva\\Documents\\python\\Programação_1\\NLTK\\input.txt", "r", encoding="utf-8") as file:
+    #     texto = file.read()
+
+    with open("/home/savio/Documentos/curso-python/Programação_1/NLTK/input.txt", "r", encoding="utf-8") as file:
         texto = file.read()
 
 except FileNotFoundError:
