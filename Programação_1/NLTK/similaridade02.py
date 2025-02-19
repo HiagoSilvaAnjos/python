@@ -1,34 +1,46 @@
 from math import sqrt
 import spacy
+from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = ["Cachorros gostam de brincar no parque.", "Cachorros gostam de brincar no parque."]
+sentences = "a dog and a cat. a frog and a cat"
 
-# Processa as frases para obter os documentos (objetos Doc do spaCy)
-doc01 = nlp(sentences[0])
-doc02 = nlp(sentences[1])
+doc = nlp(sentences)
+sentences_list = [sent.text for sent in doc.sents]
+print(sentences_list)
 
-# Extrai os embeddings (vetores) das frases
-embeddings1 = doc01.vector  # Vetor para a primeira frase
-embeddings2 = doc02.vector  # Vetor para a segunda frase
+# Tokeniza e remove pontuações e stopwords
+sentences_clean = []
+for sent in sentences_list:
+    set_of_words = [token.text.lower() for token in nlp(sent) if not token.is_punct and not token.is_stop]
+    sentences_clean.append(set_of_words)
 
-# Função para calcular a soma dos quadrados de um vetor, retornando o valor da raiz quadrada
+# Contagem de palavras
+contagem1 = Counter(sentences_clean[0])
+contagem2 = Counter(sentences_clean[1])
+
+# União das palavras únicas sem stopwords
+uniqueWords = set(sentences_clean[0]).union(sentences_clean[1])
+
+# Frequência das palavras
+frequence01 = [contagem1[word] for word in uniqueWords]
+frequence02 = [contagem2[word] for word in uniqueWords]
+
+# Função para calcular a soma dos quadrados de um vetor, retornando a raiz quadrada
 def squared_sum(x):
-    """Calcula a soma dos quadrados e retorna o valor da raiz quadrada arredondado para 3 casas decimais"""
-    return round(sqrt(sum([a*a for a in x])), 3)
+    return round(sqrt(sum([a * a for a in x])), 2)
 
 # Função para calcular a similaridade do cosseno entre dois vetores
 def cos_similarity(x, y):    
-    # O numerador é o produto escalar (dot product) entre os dois vetores
-    numerator = sum(a * b for a, b in zip(x, y))
-    
-    # O denominador é o produto das normas (módulos) dos dois vetores
-    denominator = squared_sum(x) * squared_sum(y)
-    
-    # Retorna a similaridade do cosseno, que é o produto escalar dividido pelo produto das normas
-    return round(numerator / float(denominator), 3)
+    numerator = sum(a * b for a, b in zip(x, y))  # Produto escalar
+    denominator = squared_sum(x) * squared_sum(y)  # Produto das normas
+    return round(numerator / float(denominator), 3) if denominator != 0 else 0.0  # Evita divisão por zero
 
-cos_sim = cos_similarity(embeddings1, embeddings2)
+cos_sim = cos_similarity(frequence01, frequence02)
 
-print(f"Similaridade de cosseno entre os embeddings: {cos_sim:.3f}")
+print(f"Similaridade de cosseno entre os embeddings: {cos_sim:.2f}")
+
+if cos_sim > 0.5:
+    juntar_sentencas = sentences_list[0] + " " + sentences_list[1]
+    print(f"Juntando as sentenças: {juntar_sentencas}")
