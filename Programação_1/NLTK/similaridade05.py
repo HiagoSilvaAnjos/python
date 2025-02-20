@@ -57,9 +57,28 @@ while indice < len(sentences_clean) - 1:
 if indice == len(sentences_clean) - 1:
     juntando_sentencas.append(sentences_list[indice])
 
-print(f"Sentenças juntadas: {juntando_sentencas}")
 print()
 
 for sentenca in range(len(juntando_sentencas)):
-    print(f"Parágrafo {sentenca  + 1}: '{juntando_sentencas[sentenca]}'")
+
+    tokens = [token.text.lower() for token in nlp(juntando_sentencas[sentenca]) if not token.is_punct and not token.is_stop]
+
+    #checar contagem
+    contagem_palavras = Counter(tokens)
+
+    # Pegar palavras com frequencia maior que 1
+    chaves_frequentes = [chave for chave in contagem_palavras if contagem_palavras[chave] > 1]
+
+    if chaves_frequentes:
+        print(f"Parágrafo {sentenca  + 1}:") 
+        print(f"{juntando_sentencas[sentenca]}") 
+        print(f"<Tópicos: {', '.join(chaves_frequentes)}>")
+    else:
+        palavras_relevantes = [token.text.lower() for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ"]]
+        topicos = palavras_relevantes[0] if palavras_relevantes else tokens[0].text.lower()
+
+        print(f"Parágrafo {sentenca + 1}:") 
+        print(f"'{juntando_sentencas[sentenca]}'") 
+        print(f"<Tópicos: {topicos}>")
+
     print()
