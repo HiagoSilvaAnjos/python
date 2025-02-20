@@ -4,7 +4,7 @@ from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "a dog and a cat. a frog and a cat"
+sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning."
 
 doc = nlp(sentences)
 sentences_list = [sent.text for sent in doc.sents]
