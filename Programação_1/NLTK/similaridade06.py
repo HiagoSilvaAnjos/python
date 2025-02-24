@@ -4,7 +4,7 @@ from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web. Utilizar Next.js com React é uma ótima escolha para desenvolvimento web."
+sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Nextjs é um framework baseado em React para desenvolvimento web. Nextjs expande as funcionalidades do React, facilitando o desenvolvimento web. Utilizar Nextjs com React é uma ótima escolha para desenvolvimento web."
 
 doc = nlp(sentences)
 sentences_list = [sent.text.strip() for sent in doc.sents]
@@ -71,7 +71,7 @@ for sentenca in range(len(juntando_sentencas)):
         print(f"{juntando_sentencas[sentenca]}") 
         print(f"<Tópicos: {', '.join(chaves_frequentes)}>")
     else:
-        palavras_relevantes = [token.text.lower() for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ"]]
+        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ"]]
         topicos = palavras_relevantes[0] if palavras_relevantes else tokens[0].text.lower()
 
         print(f"Parágrafo {sentenca + 1}:") 

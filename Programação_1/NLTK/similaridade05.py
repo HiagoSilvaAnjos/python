@@ -18,13 +18,13 @@ from collections import Counter
 # Carregar o modelo pré-treinado em português
 nlp = spacy.load("pt_core_news_lg")
 
-# sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
+sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
 
 # sentences = "Python é uma linguagem de programação popular para ciência de dados. Rust é conhecido por sua alta segurança e performance."
 
 # sentences = "Um cachorro e um gato. Um sapo e um gato"
 
-sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. Nextjs expande as funcionalidades do React, facilitando o desenvolvimento web."
+# sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. Nextjs expande as funcionalidades do React, facilitando o desenvolvimento web."
 
 #FIXME: Quebrando o texto em sentenças
 doc = nlp(sentences)
@@ -179,7 +179,7 @@ FIXME: Como encontrar os tópicos relevantes:
             Fazer um join na palavras com maior frequência e exibir como tópico separadas por virgula
 
         2. Se não existir palavars com frequencia maior que 1
-            Vamos pegar palavras relevantes, que são substantivos, verbos e adjetivos
+            Vamos pegar palavras relevantes, que são substantivos, verbos e adjetivos, nomes próprios
             Se não existir palavras relevantes, pegar a primeira palavra da sentença
             Exibir a sentença e a palavra relevante como tópico
     
