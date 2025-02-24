@@ -4,7 +4,7 @@ from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Nextjs é um framework baseado em React para desenvolvimento web. Nextjs expande as funcionalidades do React, facilitando o desenvolvimento web. Utilizar Nextjs com React é uma ótima escolha para desenvolvimento web."
+sentences = "A ginasta Jade Barbosa, que obteve três medalhas nos Jogos Pan-Americanos do Rio, em julho, venceu votação na internet e será a representante brasileira no revezamento da tocha olímpica para Pequim-2008. A tocha passará por vinte países, mas o Brasil não estará no percurso olímpico. Por isso, Jade participará do evento em Buenos Aires, na Argentina, única cidade da América do Sul a receber o símbolo dos Jogos.O revezamento terminará em 8 de agosto, primeiro dia das Olimpíadas de Pequim."
 
 doc = nlp(sentences)
 sentences_list = [sent.text.strip() for sent in doc.sents]
@@ -71,11 +71,17 @@ for sentenca in range(len(juntando_sentencas)):
         print(f"{juntando_sentencas[sentenca]}") 
         print(f"<Tópicos: {', '.join(chaves_frequentes)}>")
     else:
-        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ"]]
-        topicos = palavras_relevantes[0] if palavras_relevantes else tokens[0].text.lower()
+
+        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ", "PROPN"]]
+        topicos = []
+        if palavras_relevantes and len(palavras_relevantes) > 1:
+            topicos.append(palavras_relevantes[0])
+            topicos.append(palavras_relevantes[1])
+        else:
+            topicos.append(palavras_relevantes[0])
 
         print(f"Parágrafo {sentenca + 1}:") 
         print(f"'{juntando_sentencas[sentenca]}'") 
-        print(f"<Tópicos: {topicos}>")
+        print(f"<Tópicos: {', '.join(topicos)}>")
 
     print()
