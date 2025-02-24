@@ -6,15 +6,16 @@ from math import sqrt
 import spacy
 from collections import Counter
 
+# Carregar o modelo pré-treinado em português
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
+# sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
 
 # sentences = "Python é uma linguagem de programação popular para ciência de dados. Rust é conhecido por sua alta segurança e performance."
 
 # sentences = "Um cachorro e um gato. Um sapo e um gato"
 
-# sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
+sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. Nextjs expande as funcionalidades do React, facilitando o desenvolvimento web."
 
 #FIXME: Quebrando o texto em sentenças
 doc = nlp(sentences)
@@ -102,18 +103,40 @@ FIXME: LÓGICA do while:
     Correção em: similaridade06.py
 
 """
+
+print(f"Iniciando a Similaridade:")
+print()
 while indice < len(sentences_clean) -1: #1
+
+    print(f"Pegando a frequencia de cada palavra de cada sentença:")
+    print()
     contagem_palavras01 = Counter(sentences_clean[indice]) #2
+    print(sentences_clean[indice])
+    print(contagem_palavras01)
+    print()
     contagem_palavras02 = Counter(sentences_clean[indice + 1]) #2
+    print(sentences_clean[indice + 1])
+    print(contagem_palavras02)
 
+    print()
+
+    print(f"Juntando as duas senteças: ")
     palavras_unicas_lista = set(sentences_clean[indice]).union(sentences_clean[indice + 1]) #3
+    print(palavras_unicas_lista)
+    print()
 
+    print(f"Obtendo a frequencia de cada palvra de cada sentença em relação a lista unificada:")
     frequencia_palavras_sentenca01 = [contagem_palavras01[word] for word in palavras_unicas_lista] #4
+    print(frequencia_palavras_sentenca01)
+    print()
     frequencia_palavras_sentenca02 = [contagem_palavras02[word] for word in palavras_unicas_lista]  #4  
+    print(frequencia_palavras_sentenca02)
+    print()
 
     cos_sim = cos_similarity(frequencia_palavras_sentenca01, frequencia_palavras_sentenca02) #5
 
     print(f"Similaridade de cosseno entre as sentenças {indice + 1} e {indice + 2}: {cos_sim:.2f}")
+    print()
 
     if cos_sim >= limite: #6
         # Juntando as sentenças
@@ -153,6 +176,9 @@ FIXME: Como encontrar os tópicos relevantes:
     
 """
 
+print(f"Saída Final:")
+print()
+
 for sentenca in range(len(juntando_sentencas)):
 
     tokens = [token.text.lower() for token in nlp(juntando_sentencas[sentenca]) if not token.is_punct and not token.is_stop]
@@ -168,11 +194,17 @@ for sentenca in range(len(juntando_sentencas)):
         print(f"{juntando_sentencas[sentenca]}") 
         print(f"<Tópicos: {', '.join(chaves_frequentes)}>")
     else:
-        palavras_relevantes = [token.text.lower() for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ"]]
-        topicos = palavras_relevantes[0] if palavras_relevantes else tokens[0].text.lower()
+        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ", "PROPN"]]
+        topicos = []
+        if palavras_relevantes and len(palavras_relevantes) > 1:
+            topicos.append(palavras_relevantes[0])
+            topicos.append(palavras_relevantes[1])
+        else:
+            topicos.append(palavras_relevantes[0])
+        # topicos = palavras_relevantes[0] if palavras_relevantes else tokens[0].text.lower()
 
         print(f"Parágrafo {sentenca + 1}:") 
         print(f"'{juntando_sentencas[sentenca]}'") 
-        print(f"<Tópicos: {topicos}>")
+        print(f"<Tópicos: {', '.join(topicos)}>")
 
     print()
