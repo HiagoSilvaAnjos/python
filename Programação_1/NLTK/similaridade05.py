@@ -29,9 +29,9 @@ sentences = "Python é uma linguagem de programação popular para ciência de d
 #FIXME: Quebrando o texto em sentenças
 doc = nlp(sentences)
 sentences_list = [sent.text.strip() for sent in doc.sents]
-print(f"Quebrando texto em sentenças: ")
-print(sentences_list)
-print()
+# print(f"Quebrando texto em sentenças: ")
+# print(sentences_list)
+# print()
 
 # Tokeniza e remove pontuações e stopwords
 
@@ -45,9 +45,9 @@ for sent in sentences_list:
     set_of_words = [token.text.lower() for token in nlp(sent) if not token.is_punct and not token.is_stop]
     sentences_clean.append(set_of_words)
 
-print(f"Removendo pontuações e stopwords: ")
-print(sentences_clean)
-print()
+# print(f"Removendo pontuações e stopwords: ")
+# print(sentences_clean)
+# print()
 
 
 # Encontrando o denominador que é o produto escalar (dot product) entre os dois vetores
@@ -117,30 +117,30 @@ print(f"Iniciando a Similaridade:")
 print()
 while indice < len(sentences_clean) -1: #1
 
-    print(f"Pegando a frequencia de cada palavra de cada sentença:")
-    print()
+    # print(f"Pegando a frequencia de cada palavra de cada sentença:")
+    # print()
     contagem_palavras01 = Counter(sentences_clean[indice]) #2
-    print(sentences_clean[indice])
-    print(contagem_palavras01)
-    print()
+    # print(sentences_clean[indice])
+    # print(contagem_palavras01)
+    # print()
     contagem_palavras02 = Counter(sentences_clean[indice + 1]) #2
-    print(sentences_clean[indice + 1])
-    print(contagem_palavras02)
+    # print(sentences_clean[indice + 1])
+    # print(contagem_palavras02)
 
-    print()
+    # print()
 
-    print(f"Juntando as duas senteças: ")
+    # print(f"Juntando as duas senteças: ")
     palavras_unicas_lista = set(sentences_clean[indice]).union(sentences_clean[indice + 1]) #3
-    print(palavras_unicas_lista)
-    print()
+    # print(palavras_unicas_lista)
+    # print()
 
-    print(f"Obtendo a frequencia de cada palvra de cada sentença em relação a lista unificada:")
+    # print(f"Obtendo a frequencia de cada palvra de cada sentença em relação a lista unificada:")
     frequencia_palavras_sentenca01 = [contagem_palavras01[word] for word in palavras_unicas_lista] #4
-    print(frequencia_palavras_sentenca01)
-    print()
+    # print(frequencia_palavras_sentenca01)
+    # print()
     frequencia_palavras_sentenca02 = [contagem_palavras02[word] for word in palavras_unicas_lista]  #4  
-    print(frequencia_palavras_sentenca02)
-    print()
+    # print(frequencia_palavras_sentenca02)
+    # print()
 
     cos_sim = cos_similarity(frequencia_palavras_sentenca01, frequencia_palavras_sentenca02) #5
 
@@ -185,8 +185,8 @@ FIXME: Como encontrar os tópicos relevantes:
     
 """
 
-print(f"Saída Final:")
-print()
+# print(f"Saída Final:")
+# print()
 
 for sentenca in range(len(juntando_sentencas)):
 

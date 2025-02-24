@@ -4,7 +4,7 @@ from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "A ginasta Jade Barbosa, que obteve três medalhas nos Jogos Pan-Americanos do Rio, em julho, venceu votação na internet e será a representante brasileira no revezamento da tocha olímpica para Pequim-2008. A tocha passará por vinte países, mas o Brasil não estará no percurso olímpico. Por isso, Jade participará do evento em Buenos Aires, na Argentina, única cidade da América do Sul a receber o símbolo dos Jogos.O revezamento terminará em 8 de agosto, primeiro dia das Olimpíadas de Pequim."
+sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
 
 doc = nlp(sentences)
 sentences_list = [sent.text.strip() for sent in doc.sents]
