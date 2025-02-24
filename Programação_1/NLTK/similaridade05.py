@@ -2,6 +2,15 @@
 # pip install spacy
 # python -m spacy download pt_core_news_lg
 
+#MINHAS REFERENCIAS:
+"""
+1 - https://docs.google.com/presentation/d/1lpWQ6Zh4XyVa2F0VQNYx_g7N3aX2BpeDdOuuzLSaZiY/edit#slide=id.g335352aba55_0_13
+2 - https://www.newscatcherapi.com/blog/ultimate-guide-to-text-similarity-with-python
+3 - https://www.nltk.org/
+4 - https://spacy.io/
+5 - https://www.youtube.com/watch?v=Vr9QXpELdrs => Explicação Maravilhosa
+"""
+
 from math import sqrt
 import spacy
 from collections import Counter
