@@ -1,6 +1,14 @@
 from math import sqrt
 import spacy
+import nltk
+
 from collections import Counter
+from nltk.stem import RSLPStemmer
+
+
+nltk.download('rslp')
+stemmer = RSLPStemmer()
+
 
 nlp = spacy.load("pt_core_news_lg")
 
@@ -25,7 +33,9 @@ sentences_list = [sent.text.strip() for sent in doc.sents]
 sentences_clean = []
 for sent in sentences_list:
     set_of_words = [token.text.lower() for token in nlp(sent) if not token.is_punct and not token.is_stop]
-    sentences_clean.append(set_of_words)
+    
+    set_of_words_stemmer = [stemmer.stem(token.text) for token in nlp(sent) if not token.is_punct and not token.is_stop]
+    sentences_clean.append(set_of_words_stemmer)
 
 def squared_sum(x):
     return round(sqrt(sum([a * a for a in x])), 2)
