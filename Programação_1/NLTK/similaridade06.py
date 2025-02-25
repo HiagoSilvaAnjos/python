@@ -39,7 +39,7 @@ juntando_sentencas = []
 sentenca_atual = sentences_list[0]  
 
 indice = 0
-limite = 0.52
+limite = 0.4
 
 while indice < len(sentences_clean) - 1:
     # contagem_palavras01 = Counter(sentences_clean[indice]) # retorna um objeto: {"palavra": frequencia}
