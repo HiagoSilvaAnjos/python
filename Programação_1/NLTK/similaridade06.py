@@ -42,9 +42,9 @@ while indice < len(sentences_clean) - 1:
 
     print(f"Similaridade de cosseno entre as sentenças {indice + 1} e {indice + 2}: {cos_sim:.2f}")
 
-    if cos_sim >= limite:
-        # Se forem similares, acumula na variável `sentenca_atual`
-        sentenca_atual += " " + sentences_list[indice + 1]
+    if cos_sim >= limite: 
+        # Se forem similares,  
+        sentenca_atual += " " + sentences_list[indice + 1] 
     else:
         # Se não forem similares, adiciona a sentença acumulada e inicia uma nova
         juntando_sentencas.append(sentenca_atual)
@@ -53,14 +53,14 @@ while indice < len(sentences_clean) - 1:
     indice += 1
 
 # Adiciona a última sentença acumulada à lista
-juntando_sentencas.append(sentenca_atual)
+if indice == len(sentences_clean) - 1: #8
+    juntando_sentencas.append(sentenca_atual)
 
 print("\nSentenças agrupadas:\n")
 for sentenca in range(len(juntando_sentencas)):
 
     tokens = [token.text.lower() for token in nlp(juntando_sentencas[sentenca]) if not token.is_punct and not token.is_stop]
 
-   
     contagem_palavras = Counter(tokens)
 
     # Pegar palavras com frequencia maior que 1
