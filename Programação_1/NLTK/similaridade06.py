@@ -4,9 +4,21 @@ from collections import Counter
 
 nlp = spacy.load("pt_core_news_lg")
 
-sentences = "Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning. JavaScript é essencial para desenvolvimento web. Rust é conhecido por sua alta segurança e performance. Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web."
+texto = ""
 
-doc = nlp(sentences)
+# FIXME: Windows
+try:
+    # with open("C:\\Users\\Hiago Silva\\Documents\\python\\Programação_1\\NLTK\\input.txt", "r", encoding="utf-8") as file:
+    #     texto = file.read()
+
+    with open("/home/savio/Documentos/curso-python/Programação_1/NLTK/input.txt", "r", encoding="utf-8") as file:
+        texto = file.read()
+
+except FileNotFoundError:
+    print("Arquivo não encontrado")
+print()
+
+doc = nlp(texto)
 sentences_list = [sent.text.strip() for sent in doc.sents]
 
 # Tokeniza e remove pontuações e stopwords
@@ -30,13 +42,23 @@ indice = 0
 limite = 0.52
 
 while indice < len(sentences_clean) - 1:
-    contagem_palavras01 = Counter(sentences_clean[indice])
-    contagem_palavras02 = Counter(sentences_clean[indice + 1])
+    # contagem_palavras01 = Counter(sentences_clean[indice]) # retorna um objeto: {"palavra": frequencia}
+    # contagem_palavras02 = Counter(sentences_clean[indice + 1])
 
-    palavras_unicas_lista = set(sentences_clean[indice]).union(sentences_clean[indice + 1])
+    palavras_unicas_lista = list(set(sentences_clean[indice] + sentences_clean[indice + 1]))
 
-    frequencia_palavras_sentenca01 = [contagem_palavras01[word] for word in palavras_unicas_lista]
-    frequencia_palavras_sentenca02 = [contagem_palavras02[word] for word in palavras_unicas_lista]     
+    # frequencia_palavras_sentenca01 = [contagem_palavras01[palavra] for palavra in palavras_unicas_lista]
+    # frequencia_palavras_sentenca02 = [contagem_palavras02[palavra] for palavra in palavras_unicas_lista]   
+
+    frequencia_palavras_sentenca01 = [0] * len(palavras_unicas_lista)
+    frequencia_palavras_sentenca02 = [0] * len(palavras_unicas_lista) 
+
+    for token in sentences_clean[indice]: frequencia_palavras_sentenca01[palavras_unicas_lista.index(token)] +=1
+
+    for token in sentences_clean[indice + 1]: frequencia_palavras_sentenca02[palavras_unicas_lista.index(token)] +=1
+
+    # print(frequencia_palavras_sentenca01)
+    # print(frequencia_palavras_sentenca02)
 
     cos_sim = cos_similarity(frequencia_palavras_sentenca01, frequencia_palavras_sentenca02)
 
@@ -72,7 +94,7 @@ for sentenca in range(len(juntando_sentencas)):
         print(f"<Tópicos: {', '.join(chaves_frequentes)}>")
     else:
 
-        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["NOUN", "VERB", "ADJ", "PROPN"]]
+        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["VERB", "ADJ", "PROPN", "NOUN"]]
         topicos = []
         if palavras_relevantes and len(palavras_relevantes) > 1:
             topicos.append(palavras_relevantes[0])
