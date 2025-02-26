@@ -1,0 +1,12 @@
+Python é uma linguagem de programação popular para ciência de dados. Muitas pessoas usam a linguagem Python para ciência de dados e machine learning.
+<Tópicos: python, linguagem, ciência, dados>
+
+JavaScript é essencial para desenvolvimento web.
+<Tópicos: javascript, essencial>
+
+Rust é conhecido por sua alta segurança e performance.
+<Tópicos: rust, alta>
+
+Next.js é um framework baseado em React para desenvolvimento web. Next.js expande as funcionalidades do React, facilitando o desenvolvimento web.
+<Tópicos: next.js, react, desenvolvimento, web>
+
