@@ -3,8 +3,22 @@ from collections import Counter
 from math import sqrt
 nlp = spacy.load("pt_core_news_lg")
 
-caminho_relativo = "/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_entrada.txt"
+caminho_relativo_entrada = "/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_entrada.txt"
+caminho_relativo_saida = "/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_saida.txt"
 
+#HELPER FUNCTIONS
+def remover_stopwords_pontuacao(sentenca_tokenizada):  
+       return [token.text for token in nlp(sentenca_tokenizada) if not token.is_punct and not token.is_stop]
+
+def squared_sum(x):
+    return round(sqrt(sum([a * a for a in x])), 2)
+
+def similaridade_do_cossseno(x, y):    
+    numerador = sum(a * b for a, b in zip(x, y))  
+    denominador = squared_sum(x) * squared_sum(y) 
+    return round(numerador / float(denominador), 3) if denominador != 0 else 0.0  
+
+#MAIN FUNCTIONS
 def abrir_arquivo(caminho_relativo):
     try:
         with open(caminho_relativo, "r", encoding="utf-8") as file:
@@ -23,9 +37,6 @@ def processar_texto(texto):
         sentencas_limpas.append(sentenca_limpa)
 
     return (sentencas_limpas,sentencas_tokenizadas)
-
-def remover_stopwords_pontuacao(sentenca_tokenizada):  
-       return [token.text.lower() for token in nlp(sentenca_tokenizada) if not token.is_punct and not token.is_stop]
 
 def calcular_similaridade(sentencas_processadas, sentencas_originais, indice = 0, limite = 0.4):
     sentenca_atual_de_memoria = str(sentencas_originais[0])
@@ -59,18 +70,9 @@ def calcular_similaridade(sentencas_processadas, sentencas_originais, indice = 0
 
     return lista_sentencas_concatenadas
 
-
-def squared_sum(x):
-    return round(sqrt(sum([a * a for a in x])), 2)
-
-def similaridade_do_cossseno(x, y):    
-    numerador = sum(a * b for a, b in zip(x, y))  
-    denominador = squared_sum(x) * squared_sum(y) 
-    return round(numerador / float(denominador), 3) if denominador != 0 else 0.0  
-
 def pegar_topico(texto_concatenado):
     tokens = remover_stopwords_pontuacao(texto_concatenado)
-
+    
     contagem_palavras = Counter(tokens)
     chaves_frequentes = [chave for chave in contagem_palavras if contagem_palavras[chave] > 1]
     
@@ -78,12 +80,7 @@ def pegar_topico(texto_concatenado):
         topicos = f"<Tópicos: {', '.join(chaves_frequentes)}>"
         return (texto_concatenado, topicos)
     else:
-        # palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["VERB", "ADJ", "PROPN", "NOUN"]]
-        palavras_relevantes = []
-
-        for token in nlp(" ".join(tokens)):
-            if token.pos_ in ["VERB", "ADJ", "PROPN", "NOUN"]:
-                palavras_relevantes.append(token)
+        palavras_relevantes = [token.text for token in nlp(" ".join(tokens)) if token.pos_ in ["VERB", "ADJ", "PROPN", "NOUN"]]
 
         if palavras_relevantes and len(palavras_relevantes) > 1:
             topicos = []
@@ -96,32 +93,31 @@ def pegar_topico(texto_concatenado):
             return (texto_concatenado, f"<Tópicos: {topico}>")
         
 def criar_novo_arquivo(lista_sentencas_completas):
-    with open("/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_saida.txt", "a", encoding="utf-8") as paragrafos:
+    with open(caminho_relativo_saida, "w", encoding="utf-8") as paragrafos:
         for paragrafo in lista_sentencas_completas:
-            paragrafos.write(paragrafo[0])
-            paragrafos.write("\n")
-            paragrafos.write(paragrafo[1])
-            paragrafos.write("\n")
+            paragrafos.write(f"{paragrafo[0] } \n")
+            paragrafos.write(f"{paragrafo[1] } \n")
             paragrafos.write("\n")
 
-    
-def main(): 
-    # Nível 1
-    texto = abrir_arquivo(caminho_relativo)
-    texto_processado = processar_texto(texto)
+def start(): 
+    try:
+        # Nível 1
+        texto = abrir_arquivo(caminho_relativo_entrada)
+        texto_processado = processar_texto(texto)
 
-    # Nível 2
-    sentencas_concatenas = calcular_similaridade(texto_processado[0], texto_processado[1])
+        # Nível 2
+        sentencas_concatenadas = calcular_similaridade(texto_processado[0], texto_processado[1])
 
-    #Nível 3
-    sentencas_completas = []
-    for sentenca in sentencas_concatenas:
-        texto_topico = pegar_topico(sentenca)
-        sentencas_completas.append(texto_topico)
+        #Nível 3
+        sentencas_completas = []
+        for sentenca in sentencas_concatenadas:
+            texto_topico = pegar_topico(sentenca)
+            sentencas_completas.append(texto_topico)
+            
+        criar_novo_arquivo(sentencas_completas)
 
-    criar_novo_arquivo(sentencas_completas)
+        print("Arquivo de texto processado com sucesso!")
+    except Exception as e:
+        print(f"Erro ao processar o texto: {e}")
 
-
-
-if __name__ == "__main__":
-    main()
+start()
