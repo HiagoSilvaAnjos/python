@@ -3,8 +3,8 @@ from collections import Counter
 from math import sqrt
 nlp = spacy.load("pt_core_news_lg")
 
-caminho_relativo_entrada = "/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_entrada.txt"
-caminho_relativo_saida = "/home/savio/Documentos/curso-python/Programação_1/ProjetoFinal/texto_saida.txt"
+caminho_relativo_entrada = "/workspaces/python/Programação_1/ProjetoFinal/texto_entrada.txt"
+caminho_relativo_saida = "/workspaces/python/Programação_1/ProjetoFinal/texto_saida.txt"
 
 #HELPER FUNCTIONS
 def remover_stopwords_pontuacao(sentenca_tokenizada):  
