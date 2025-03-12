@@ -14,7 +14,12 @@ def squared_sum(x):
     return round(sqrt(sum([a * a for a in x])), 2)
 
 def similaridade_do_cossseno(x, y):    
-    numerador = sum(a * b for a, b in zip(x, y))  
+    #numerador = sum(a * b for a, b in zip(x, y))  
+    
+    numerador = 0
+    for i in range(len(x)):
+        numerador += x[i] * y[i]
+    
     denominador = squared_sum(x) * squared_sum(y) 
     return round(numerador / float(denominador), 3) if denominador != 0 else 0.0  
 
