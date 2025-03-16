@@ -1,0 +1,7 @@
+ovo 10
+leite 3
+açucar 2
+arroz 2
+feijão 3
+café 1
+sabonete 4
