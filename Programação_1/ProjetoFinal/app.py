@@ -10,17 +10,17 @@ caminho_relativo_saida = "/workspaces/python/Programação_1/ProjetoFinal/texto_
 def remover_stopwords_pontuacao(sentenca_tokenizada):  
        return [token.text for token in nlp(sentenca_tokenizada) if not token.is_punct and not token.is_stop]
 
-def squared_sum(x):
-    return round(sqrt(sum([a * a for a in x])), 2)
+def squared_sum(list):
+    return round(sqrt(sum([value_list * value_list for value_list in list])), 2)
 
-def similaridade_do_cossseno(x, y):    
+def similaridade_do_cossseno(list_1, list_2):    
     #numerador = sum(a * b for a, b in zip(x, y))  
     
     numerador = 0
-    for i in range(len(x)):
-        numerador += x[i] * y[i]
+    for i in range(len(list_1)):
+        numerador += list_1[i] * list_2[i]
     
-    denominador = squared_sum(x) * squared_sum(y) 
+    denominador = squared_sum(list_1) * squared_sum(list_2) 
     return round(numerador / float(denominador), 3) if denominador != 0 else 0.0  
 
 #MAIN FUNCTIONS
