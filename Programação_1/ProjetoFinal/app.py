@@ -60,6 +60,8 @@ def calcular_similaridade(sentencas_processadas, sentencas_originais, indice = 0
 
         cos_sim = similaridade_do_cossseno(frequencia_palavras_sentenca01, frequencia_palavras_sentenca02)
 
+        print(f"similaridade: {cos_sim}")
+
         # print(f"Similaridade de cosseno entre as sentenças {indice + 1} e {indice + 2}: {cos_sim:.2f}")
 
         if cos_sim >= limite:
